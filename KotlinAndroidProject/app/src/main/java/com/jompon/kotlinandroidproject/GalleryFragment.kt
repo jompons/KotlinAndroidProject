@@ -1,11 +1,12 @@
 package com.jompon.kotlinandroidproject
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +20,8 @@ import kotlinx.android.synthetic.main.fragment_gallery.*
  */
 class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnItemClickListener{
 
-    private var mContext :Context? = null
-    private var galleries :ArrayList<Gallery>? = null
+    private var mContext: Context? = null
+    private var galleries: ArrayList<Gallery>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = activity
@@ -42,7 +43,8 @@ class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, On
         var i = 0
         while(i<26)
         {
-            galleries?.add(Gallery(null, (i+++65).toChar() + ""))
+            if( i%2 == 0 )  galleries?.add(Gallery(null, (i+++65).toChar() + ""))
+            else            galleries?.add(Gallery(null, (i+++65).toChar() + "", getString(R.string.gallery_detail)))
         }
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary)
@@ -55,13 +57,14 @@ class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, On
         if( recyclerView.adapter == null && galleries != null ){
             val galleryAdapter = GalleryAdapter(galleries)
             galleryAdapter.setOnItemClickListener(this)
-            recyclerView.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
+            recyclerView.addItemDecoration(DividerItemDecoration(mContext, GridLayoutManager.VERTICAL))
+            recyclerView.addItemDecoration(DividerItemDecoration(mContext, GridLayoutManager.HORIZONTAL))
             recyclerView.setHasFixedSize(true)
-            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.layoutManager = GridLayoutManager(mContext, 2)
             recyclerView.itemAnimator = DefaultItemAnimator()
             recyclerView.adapter = galleryAdapter
         } else {
-            recyclerView.adapter.notifyDataSetChanged()
+            recyclerView.adapter?.notifyDataSetChanged()
         }
         swipeRefreshLayout.isRefreshing = false
     }
@@ -74,6 +77,9 @@ class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, On
 
     override fun setOnItemClickListener(v: View, position: Int) {
 
-        Toast.makeText(mContext, "Click!!", Toast.LENGTH_LONG).show()
+        val intent = Intent(mContext, GalleryDetailActivity::class.java)
+        intent.putExtra("gallery", galleries?.get(position))
+        intent.putExtra("title", galleries?.get(position)?.getTitle())
+        startActivity(intent)
     }
 }

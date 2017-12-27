@@ -5,4 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="gallery_detail">This is example %s detail</string>
+    <string name="gallery_no_detail">This is example no detail</string>
+    <string name="gallery_title">Gallery</string>
+    <string name="gallery_title_detail">Gallery Detail</string>
 </resources>
