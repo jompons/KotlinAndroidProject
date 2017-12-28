@@ -10,7 +10,6 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.jompon.kotlinandroidproject.base.BaseFragment
 import com.jompon.kotlinandroidproject.model.Gallery
 import kotlinx.android.synthetic.main.fragment_gallery.*
@@ -20,31 +19,32 @@ import kotlinx.android.synthetic.main.fragment_gallery.*
  */
 class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnItemClickListener{
 
-    private var mContext: Context? = null
+    private lateinit var mContext: Context
     private var galleries: ArrayList<Gallery>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mContext = activity
+        mContext = activity!!
         galleries = ArrayList()
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater?.inflate(R.layout.fragment_gallery, container, false)
+        return inflater.inflate(R.layout.fragment_gallery, container, false)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setBindingData()
     }
 
     override fun setBindingData() {
 
+        val photos: Array<String> = resources.getStringArray(R.array.photo_urls)
         var i = 0
         while(i<26)
         {
-            if( i%2 == 0 )  galleries?.add(Gallery(null, (i+++65).toChar() + ""))
-            else            galleries?.add(Gallery(null, (i+++65).toChar() + "", getString(R.string.gallery_detail)))
+            if( i%2 == 0 )  galleries?.add(Gallery(photos[i%photos.size], (i+++65).toChar() + ""))
+            else            galleries?.add(Gallery(photos[i%photos.size], (i+++65).toChar() + "", getString(R.string.gallery_detail)))
         }
 
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary)
@@ -55,7 +55,7 @@ class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, On
     private fun update(galleries :ArrayList<Gallery>?)
     {
         if( recyclerView.adapter == null && galleries != null ){
-            val galleryAdapter = GalleryAdapter(galleries)
+            val galleryAdapter = GalleryAdapter(mContext, galleries)
             galleryAdapter.setOnItemClickListener(this)
             recyclerView.addItemDecoration(DividerItemDecoration(mContext, GridLayoutManager.VERTICAL))
             recyclerView.addItemDecoration(DividerItemDecoration(mContext, GridLayoutManager.HORIZONTAL))

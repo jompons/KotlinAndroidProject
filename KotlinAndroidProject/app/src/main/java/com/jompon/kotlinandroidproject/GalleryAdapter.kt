@@ -1,16 +1,18 @@
 package com.jompon.kotlinandroidproject
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.jompon.kotlinandroidproject.model.Gallery
 import kotlinx.android.synthetic.main.layout_gallery.view.*
 
 /**
  * Created by Jompon on 12/26/2017.
  */
-class GalleryAdapter (val galleries: ArrayList<Gallery>?) : RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>(){
+class GalleryAdapter (private val mContext: Context, private val galleries: ArrayList<Gallery>?) : RecyclerView.Adapter<GalleryAdapter.GalleryViewHolder>(){
 
     private var onItemClickListener: OnItemClickListener? = null
 
@@ -25,6 +27,9 @@ class GalleryAdapter (val galleries: ArrayList<Gallery>?) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: GalleryViewHolder, position: Int) {
 
         holder.itemView.txtTitle.text = galleries?.get(position)?.getTitle()
+        Glide.with(mContext)
+                .load(galleries?.get(position)?.getPhoto())
+                .into(holder.itemView.imgPhoto)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GalleryViewHolder {

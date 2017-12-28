@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="photo_urls">
+        <item>http://funnypicture.org/wallpaper/2015/04/funny-animals-clips-3-background-wallpaper.jpg</item>
+        <item>https://i.ytimg.com/vi/noM4bDCUrWE/maxresdefault.jpg</item>
+        <item>https://www.askideas.com/media/08/Dog-Sad-Face-Funny-Pet.jpg</item>
+        <item>https://i.ytimg.com/vi/PXRX47L_3yE/maxresdefault.jpg</item>
+        <item>https://i.ytimg.com/vi/WtIW2sXOIT0/maxresdefault.jpg</item>
+        <item>http://ichef.bbci.co.uk/wwfeatures/wm/live/1280_720/images/live/p0/34/lx/p034lx40.jpg</item>
+        <item>https://i.ytimg.com/vi/BWHAnYIqQ_s/maxresdefault.jpg</item>
+        <item>https://i.ytimg.com/vi/gtoknSe54gs/maxresdefault.jpg</item>
+        <item>https://i.pinimg.com/originals/f5/dd/89/f5dd8972c02013370a767c130c636bd8.jpg</item>
+        <item>https://i.ytimg.com/vi/f-e9hSUSlSM/maxresdefault.jpg</item>
+        <item>https://i.ytimg.com/vi/CN1ua9-acUM/maxresdefault.jpg</item>
+        <item>http://www.sciencemag.org/sites/default/files/styles/article_main_large/public/images/sf-killercat.jpg?itok=KXmowoFl</item>
+        <item>https://i.ytimg.com/vi/1iP4LNQTs_M/maxresdefault.jpg</item>
+        <item>http://www.adventurecats.org/wp-content/uploads/2017/03/jessie-koda-resize.jpg</item>
+        <item>https://i.ytimg.com/vi/HPgKSCp_Y_U/maxresdefault.jpg</item>
+        <item>https://i.ytimg.com/vi/EvYmF3flf2I/maxresdefault.jpg</item>
+    </string-array>
+</resources>
