@@ -27,12 +27,10 @@ class GalleryDetailActivity : BaseActivity(){
 
     override fun setBindingData() {
 
-        supportActionBar?.let {
-            supportActionBar -> supportActionBar.apply {
-                supportActionBar.setDisplayHomeAsUpEnabled(true)
-                supportActionBar.setHomeButtonEnabled(true)
-                supportActionBar.subtitle = gallery?.getTitle()
-            }
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+            subtitle = gallery?.getTitle()
         }
 
         txtTitle.text = gallery?.getTitle()

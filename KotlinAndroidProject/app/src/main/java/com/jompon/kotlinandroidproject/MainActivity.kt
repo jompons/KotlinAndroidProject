@@ -73,9 +73,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         // Handle navigation view item clicks here.
         when (itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
-            }
+
             R.id.nav_gallery -> {
 
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -85,8 +83,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.nav_slideshow -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_map -> {
 
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.content_frame, MapFragment(), "map")
+                fragmentTransaction.commit()
             }
             R.id.nav_share -> {
 
