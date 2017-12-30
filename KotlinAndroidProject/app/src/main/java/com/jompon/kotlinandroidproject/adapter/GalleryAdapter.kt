@@ -1,4 +1,4 @@
-package com.jompon.kotlinandroidproject
+package com.jompon.kotlinandroidproject.adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.jompon.kotlinandroidproject.impl.OnItemClickListener
+import com.jompon.kotlinandroidproject.R
 import com.jompon.kotlinandroidproject.model.Gallery
 import kotlinx.android.synthetic.main.layout_gallery.view.*
 

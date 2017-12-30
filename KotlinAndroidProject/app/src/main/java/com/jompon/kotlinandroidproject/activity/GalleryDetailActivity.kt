@@ -1,13 +1,13 @@
-package com.jompon.kotlinandroidproject
+package com.jompon.kotlinandroidproject.activity
 
 import android.os.Bundle
 import android.view.MenuItem
 import com.bumptech.glide.Glide
+import com.jompon.kotlinandroidproject.R
 import com.jompon.kotlinandroidproject.base.BaseActivity
 import com.jompon.kotlinandroidproject.model.Gallery
 import kotlinx.android.synthetic.main.activity_gallery_detail.*
 import kotlinx.android.synthetic.main.layout_gallery.*
-import kotlinx.android.synthetic.main.layout_gallery.view.*
 
 /**
  * Created by Jompon on 12/27/2017.

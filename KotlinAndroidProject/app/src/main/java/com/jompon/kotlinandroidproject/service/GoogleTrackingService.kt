@@ -2,7 +2,6 @@ package com.jompon.kotlinandroidproject.service
 
 import android.app.Service
 import android.content.Intent
-import android.content.IntentFilter
 import android.location.Location
 import android.os.*
 import android.util.Log
@@ -11,7 +10,6 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationListener
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
-import com.jompon.kotlinandroidproject.MapFragment
 import java.util.*
 
 /**

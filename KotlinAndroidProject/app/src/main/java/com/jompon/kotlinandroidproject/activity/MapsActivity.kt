@@ -1,4 +1,4 @@
-package com.jompon.kotlinandroidproject
+package com.jompon.kotlinandroidproject.activity
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -14,6 +14,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.jompon.kotlinandroidproject.R
 import com.jompon.kotlinandroidproject.base.BaseActivity
 import com.jompon.kotlinandroidproject.service.GoogleTrackingService
 import kotlinx.android.synthetic.main.activity_maps.*

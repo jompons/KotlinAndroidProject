@@ -1,4 +1,4 @@
-package com.jompon.kotlinandroidproject
+package com.jompon.kotlinandroidproject.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,10 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.jompon.kotlinandroidproject.impl.OnItemClickListener
+import com.jompon.kotlinandroidproject.R
+import com.jompon.kotlinandroidproject.activity.GalleryDetailActivity
+import com.jompon.kotlinandroidproject.adapter.GalleryAdapter
 import com.jompon.kotlinandroidproject.base.BaseFragment
 import com.jompon.kotlinandroidproject.model.Gallery
 import kotlinx.android.synthetic.main.fragment_gallery.*
@@ -17,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_gallery.*
 /**
  * Created by Jompon on 12/26/2017.
  */
-class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnItemClickListener{
+class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, OnItemClickListener {
 
     private lateinit var mContext: Context
     private var galleries: ArrayList<Gallery>? = null
