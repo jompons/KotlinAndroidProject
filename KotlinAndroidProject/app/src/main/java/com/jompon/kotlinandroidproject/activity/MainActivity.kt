@@ -11,6 +11,7 @@ import com.jompon.kotlinandroidproject.fragment.GalleryFragment
 import com.jompon.kotlinandroidproject.fragment.MapFragment
 import com.jompon.kotlinandroidproject.R
 import com.jompon.kotlinandroidproject.base.BaseActivity
+import com.jompon.kotlinandroidproject.fragment.SlideshowFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -85,6 +86,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             }
             R.id.nav_slideshow -> {
 
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.content_frame, SlideshowFragment(), "slideshow")
+                fragmentTransaction.commit()
             }
             R.id.nav_map -> {
 
