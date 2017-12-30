@@ -123,11 +123,6 @@ class MapFragment : BaseFragment(), OnMapReadyCallback{
                 isZoomGesturesEnabled = true
                 setAllGesturesEnabled(true)
             }
-            setOnMapClickListener{
-                latlng ->
-                val intent = Intent(mContext, MainActivity::class.java)
-                startActivity(intent)
-            }
             setOnMyLocationButtonClickListener {
 
                 if( latlng != null ){
