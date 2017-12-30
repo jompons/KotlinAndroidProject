@@ -139,7 +139,10 @@ class MapFragment : BaseFragment(), OnMapReadyCallback{
                 val intent = Intent(mContext, MainActivity::class.java)
                 startActivity(intent)
             }
-            addMarker(MarkerOptions().position(LatLng(13.765064, 100.538224)).title("Marker in Victory Monument"))
+
+            val victoryMonument = LatLng(13.765064, 100.538224)
+            addMarker(MarkerOptions().position(victoryMonument).title("Marker in Victory Monument"))
+            moveCamera(CameraUpdateFactory.newLatLng(victoryMonument))
         }
     }
 
