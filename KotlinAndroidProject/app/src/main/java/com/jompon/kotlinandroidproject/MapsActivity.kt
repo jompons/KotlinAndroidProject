@@ -116,7 +116,7 @@ class MapsActivity : BaseActivity(), OnMapReadyCallback {
             setOnMyLocationButtonClickListener {
 
                 if (latlng != null) {
-                    googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12.0f))
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12.0f))
                 }
                 true
             }
