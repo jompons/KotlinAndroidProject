@@ -43,7 +43,7 @@ class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, On
 
     override fun setBindingData() {
 
-        val photos: Array<String> = resources.getStringArray(R.array.photo_urls)
+        val photos: Array<String> = resources.getStringArray(R.array.gallery_urls)
         var i = 0
         while(i<26)
         {
