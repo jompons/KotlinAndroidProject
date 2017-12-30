@@ -10,4 +10,6 @@
     <string name="gallery_no_detail">This is example no detail</string>
     <string name="gallery_title">Gallery</string>
     <string name="gallery_title_detail">Gallery Detail</string>
+
+    <string name="maps_title">Maps</string>
 </resources>

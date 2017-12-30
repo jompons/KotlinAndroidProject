@@ -31,12 +31,17 @@
             android:name=".GalleryDetailActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".MapsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <service android:name=".service.GoogleTrackingService" />
         <receiver android:name=".MapFragment$LocationReceiver" />
+        <receiver android:name=".MapsActivity$LocationReceiver" />
     </application>
 
 </manifest>

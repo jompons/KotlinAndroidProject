@@ -6,52 +6,44 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.location.Location
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.MenuItem
 import android.widget.Toast
-import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.jompon.kotlinandroidproject.base.BaseFragment
+import com.jompon.kotlinandroidproject.base.BaseActivity
 import com.jompon.kotlinandroidproject.service.GoogleTrackingService
-import kotlinx.android.synthetic.main.fragment_map.*
-
+import kotlinx.android.synthetic.main.activity_maps.*
 
 /**
- * Created by Jompon on 12/28/2017.
+ * Created by Jompon on 12/30/2017.
  */
-class MapFragment : BaseFragment(), OnMapReadyCallback{
+class MapsActivity : BaseActivity(), OnMapReadyCallback {
 
-    private var mContext: Context? = null
-    private var googleMap: GoogleMap? = null
+    private lateinit var mMap: GoogleMap
     private var latlng: LatLng? = null
     private var receiver: LocationReceiver? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mContext = activity!!
+        setContentView(R.layout.activity_maps)
+        setSupportActionBar(toolbar)
+        setBindingData()
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        val mapFragment = supportFragmentManager
+                .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun setBindingData() {
 
-        return inflater.inflate(R.layout.fragment_map, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mapView.onCreate(savedInstanceState)
-
-        // Needs to call MapsInitializer before doing any CameraUpdateFactory calls
-        try {
-            MapsInitializer.initialize(mContext)
-            mapView.getMapAsync(this)
-        } catch (e: GooglePlayServicesNotAvailableException) {
-            e.printStackTrace()
-            Toast.makeText(mContext, e.message+"", Toast.LENGTH_LONG).show()
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+            title = getString(R.string.maps_title)
         }
     }
 
@@ -62,21 +54,19 @@ class MapFragment : BaseFragment(), OnMapReadyCallback{
 
     override fun onResume() {
         super.onResume()
-        mapView.onResume()
         if( receiver == null ){
             receiver = LocationReceiver()
             val filter = IntentFilter()
             filter.addAction(GoogleTrackingService.FILTER_ACTION)
-            mContext?.registerReceiver(receiver, filter)
+            registerReceiver(receiver, filter)
         }
     }
 
     override fun onPause() {
         if( receiver != null ){
-            mContext?.unregisterReceiver(receiver)
+            unregisterReceiver(receiver)
             receiver = null
         }
-        mapView.onPause()
         super.onPause()
     }
 
@@ -85,37 +75,37 @@ class MapFragment : BaseFragment(), OnMapReadyCallback{
         stopTracking()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        mapView.onDestroy()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mapView.onLowMemory()
-    }
-
     private fun startTracking( )
     {
-        val intent = Intent(mContext, GoogleTrackingService::class.java)
+        val intent = Intent(this, GoogleTrackingService::class.java)
         intent.action = GoogleTrackingService.START_ACTION
-        mContext?.startService(intent)
+        startService(intent)
     }
 
     private fun stopTracking( )
     {
-        val intent = Intent(mContext, GoogleTrackingService::class.java)
+        val intent = Intent(this, GoogleTrackingService::class.java)
         intent.action = GoogleTrackingService.STOP_ACTION
-        mContext?.stopService(intent)
+        stopService(intent)
     }
 
-    override fun onMapReady(p0: GoogleMap?) {
-        googleMap = p0
-        googleMap?.apply {
-            try{
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+
+        mMap.apply {
+            try {
                 isMyLocationEnabled = true
-            }catch (e: SecurityException){
-                Toast.makeText(mContext, e.message+"", Toast.LENGTH_LONG).show()
+            } catch (e: SecurityException) {
+                Toast.makeText(this@MapsActivity, e.message + "", Toast.LENGTH_LONG).show()
             }
             uiSettings?.apply {
                 isCompassEnabled = true
@@ -125,20 +115,25 @@ class MapFragment : BaseFragment(), OnMapReadyCallback{
             }
             setOnMyLocationButtonClickListener {
 
-                if( latlng != null ){
+                if (latlng != null) {
                     googleMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12.0f))
                 }
                 true
             }
-            setOnInfoWindowClickListener { marker ->
-                val intent = Intent(mContext, MapsActivity::class.java)
-                startActivity(intent)
-            }
-
+            // Add a marker in Sydney and move the camera
             val victoryMonument = LatLng(13.765064, 100.538224)
             addMarker(MarkerOptions().position(victoryMonument).title("Marker in Victory Monument"))
             moveCamera(CameraUpdateFactory.newLatLngZoom(victoryMonument, 12.0f))
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     inner class LocationReceiver : BroadcastReceiver() {
@@ -151,7 +146,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback{
                     if( latlng == null ){
                         //First location is found
                         latlng = LatLng(location.latitude, location.longitude)
-                        googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12.0f))
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 12.0f))
                     }
                     latlng = LatLng(location.latitude, location.longitude)
                 }
