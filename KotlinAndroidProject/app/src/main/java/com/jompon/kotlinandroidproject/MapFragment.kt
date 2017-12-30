@@ -137,7 +137,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback{
 
             val victoryMonument = LatLng(13.765064, 100.538224)
             addMarker(MarkerOptions().position(victoryMonument).title("Marker in Victory Monument"))
-            moveCamera(CameraUpdateFactory.newLatLng(victoryMonument))
+            moveCamera(CameraUpdateFactory.newLatLngZoom(victoryMonument, 12.0f))
         }
     }
 
