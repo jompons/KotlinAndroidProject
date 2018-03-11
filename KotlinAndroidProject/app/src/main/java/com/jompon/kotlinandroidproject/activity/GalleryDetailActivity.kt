@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide
 import com.jompon.kotlinandroidproject.R
 import com.jompon.kotlinandroidproject.base.BaseActivity
 import com.jompon.kotlinandroidproject.model.Gallery
+import com.jompon.kotlinandroidproject.util.Constant
 import kotlinx.android.synthetic.main.activity_gallery_detail.*
 import kotlinx.android.synthetic.main.layout_gallery.*
 
@@ -20,7 +21,7 @@ class GalleryDetailActivity : BaseActivity(){
         setContentView(R.layout.activity_gallery_detail)
         setSupportActionBar(toolbar)
 
-        gallery = intent.getParcelableExtra("gallery")
+        gallery = intent.getParcelableExtra(Constant.KEY_GALLERY)
         setTitle(R.string.gallery_title_detail)
         setBindingData()
     }

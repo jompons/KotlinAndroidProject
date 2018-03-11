@@ -16,6 +16,7 @@ import com.jompon.kotlinandroidproject.activity.GalleryDetailActivity
 import com.jompon.kotlinandroidproject.adapter.GalleryAdapter
 import com.jompon.kotlinandroidproject.base.BaseFragment
 import com.jompon.kotlinandroidproject.model.Gallery
+import com.jompon.kotlinandroidproject.util.Constant
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
 /**
@@ -82,8 +83,8 @@ class GalleryFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener, On
     override fun setOnItemClickListener(v: View, position: Int) {
 
         val intent = Intent(mContext, GalleryDetailActivity::class.java)
-        intent.putExtra("gallery", galleries?.get(position))
-        intent.putExtra("title", galleries?.get(position)?.getTitle())
+        intent.putExtra(Constant.KEY_GALLERY, galleries?.get(position))
+        intent.putExtra(Constant.KEY_TITLE, galleries?.get(position)?.getTitle())
         startActivity(intent)
     }
 }

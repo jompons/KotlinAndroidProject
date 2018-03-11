@@ -13,6 +13,7 @@ import com.jompon.kotlinandroidproject.R
 import com.jompon.kotlinandroidproject.activity.GalleryDetailActivity
 import com.jompon.kotlinandroidproject.base.BaseFragment
 import com.jompon.kotlinandroidproject.model.Gallery
+import com.jompon.kotlinandroidproject.util.Constant
 import kotlinx.android.synthetic.main.layout_gallery.*
 
 
@@ -28,7 +29,7 @@ class ScreenSlideshowFragment : BaseFragment(), View.OnClickListener{
             val f = ScreenSlideshowFragment()
 
             val args = Bundle()
-            args.putParcelable("gallery", gallery)
+            args.putParcelable(Constant.KEY_GALLERY, gallery)
             f.arguments = args
 
             return f
@@ -38,7 +39,7 @@ class ScreenSlideshowFragment : BaseFragment(), View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = activity!!
-        gallery = arguments!!.getParcelable("gallery")
+        gallery = arguments!!.getParcelable(Constant.KEY_GALLERY)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -63,7 +64,7 @@ class ScreenSlideshowFragment : BaseFragment(), View.OnClickListener{
     override fun onClick(p0: View?) {
 
         val intent = Intent(mContext, GalleryDetailActivity::class.java)
-        intent.putExtra("gallery", gallery)
+        intent.putExtra(Constant.KEY_GALLERY, gallery)
         startActivity(intent)
     }
 }
