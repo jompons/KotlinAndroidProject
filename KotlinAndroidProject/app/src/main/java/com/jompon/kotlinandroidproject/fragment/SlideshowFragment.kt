@@ -31,7 +31,7 @@ class SlideshowFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var mContext: Context
     private lateinit var galleries: ArrayList<Gallery>
     private lateinit var mHandler: Handler
-    private val slideshowDuration = 3000L
+    private val slideshowDuration = 5000L
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mContext = activity!!
